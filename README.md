@@ -10,6 +10,8 @@ Run it in Vagrant
 - Change [vars.yml](https://github.com/javaguirre/sentry-ansible-postgres-example/blob/master/vars.yml) to use your configuration.
 - Change [your host](https://github.com/javaguirre/sentry-ansible-postgres-example/blob/master/host)
 
-    $ ansible-playbook -i host site.yml --ask-sudo-pass
+```
+$ ansible-playbook -i host site.yml --ask-sudo-pass
+```
 
 You are done!
