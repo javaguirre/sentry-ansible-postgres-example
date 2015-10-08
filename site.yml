@@ -1,0 +1,12 @@
+- hosts: all
+  sudo: yes
+
+  vars_files:
+      - vars.yml
+
+  roles:
+      - postgresql
+      - Stouts.foundation
+      - Stouts.python
+      - Stouts.postfix
+      - Stouts.sentry

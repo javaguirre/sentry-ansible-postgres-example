@@ -1,0 +1,13 @@
+---
+
+- src: Ansibles.build-essential
+
+- src: Stouts.foundation
+
+- src: Stouts.python
+
+- src: Stouts.postfix
+
+- src: https://github.com/javaguirre/postgresql.git
+
+- src: https://github.com/javaguirre/Stouts.sentry.git

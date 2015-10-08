@@ -1,0 +1,73 @@
+---
+
+# SERVER
+timezone_timezone: Europe/Amsterdam
+hostname_enabled: yes
+hostname_hostname: "myhostname"
+
+postfix_smtp_sasl_user: "info@example.com"
+postfix_smtp_sasl_password: password
+
+sudo_users:
+  - "{{ sentry_user }}"
+sudo_passwordless:
+  - "{{ sentry_user }}"
+
+# SENTRY
+sentry_version: 7.4.0
+sentry_user: vagrant                                       # Run as user
+sentry_hostname: sentry.local
+sentry_secret_key: SentrySecret!
+
+# Initial data
+sentry_admin_username: admin                              # Creates admin user with credentials, set blank for skip
+sentry_admin_email: admin@example.com
+sentry_admin_password: password
+sentry_teams: []                                          # Creates teams for admin user, set blank for skip
+sentry_projects:                                          # Creates project for admin user, set blank for skip
+- name: Web
+  platform: python
+  team: "{{ sentry_user }}"
+
+# Setup databases
+sentry_db_engine: django.db.backends.postgresql_psycopg2
+sentry_db_name: sentry
+sentry_db_user: sentry
+sentry_db_password: "sentrypass"
+sentry_db_host: ""
+sentry_db_port: ""
+sentry_db_options: {}
+
+# Email settings
+sentry_server_email: "{{ sentry_admin_email }}"         # From email
+
+# Logging
+sentry_access_log: /var/log/nginx/sentry-access.log
+sentry_error_log: /var/log/nginx/sentry-error.log
+
+sentry_nginx_timeout: 15s
+
+# POSTGRESQL
+postgresql_version: 9.4
+postgresql_encoding: 'UTF-8'
+postgresql_locale: 'en_US.UTF-8'
+
+postgresql_admin_user: "postgres"
+postgresql_default_auth_method: "trust"
+
+postgresql_cluster_name: "main"
+postgresql_cluster_reset: true
+
+postgresql_databases:
+  - name: "{{ sentry_db_name }}"
+
+postgresql_users:
+  - name: "{{ sentry_db_user }}"
+    pass: "{{ sentry_db_password }}"
+    encrypted: no
+
+postgresql_user_privileges:
+  - name: "{{ sentry_db_user }}"
+    db: "{{ sentry_db_name }}"
+    priv: "ALL"
+    role_attr_flags: "CREATEDB"
